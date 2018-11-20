@@ -1,0 +1,1855 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LightBuzz</name>
+    </assembly>
+    <members>
+        <member name="T:LightBuzz.Axis">
+            <summary>
+            Represents a Cartesian axis.
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Axis.X">
+            <summary>
+            The X axis.
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Axis.Y">
+            <summary>
+            The Y axis.
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Axis.Z">
+            <summary>
+            The Z axis.
+            </summary>
+        </member>
+        <member name="T:LightBuzz.Calculations">
+            <summary>
+            Provides methods for doing common calculations between vectors.
+            </summary>
+        </member>
+        <member name="M:LightBuzz.Calculations.Distance(LightBuzz.Vector2D,LightBuzz.Vector2D)">
+            <summary>
+            Calculates the distace between the specified vectors in the 2D space.
+            </summary>
+            <param name="start">The starting point/vector.</param>
+            <param name="end">The end point/vector.</param>
+            <returns>The distance between the vectors in the measurement units used.</returns>
+        </member>
+        <member name="M:LightBuzz.Calculations.Distance(LightBuzz.Vector2D,LightBuzz.Vector2D,LightBuzz.Axis)">
+            <summary>
+            Calclulates the distance between the specified points in the specified axis.
+            </summary>
+            <param name="start">The first point/vector.</param>
+            <param name="end">The second point/vector.</param>
+            <param name="axis">The axis to measure the distance in.</param>
+            <returns>The distance between the vectors in the measurement units used.</returns>
+        </member>
+        <member name="M:LightBuzz.Calculations.Distance(LightBuzz.Vector2D,LightBuzz.Vector2D,LightBuzz.Axis,System.Boolean)">
+            <summary>
+            Calclulates the distance between the specified points in the specified axis.
+            </summary>
+            <param name="start">The first point/vector.</param>
+            <param name="end">The second point/vector.</param>
+            <param name="axis">The axis to measure the distance in.</param>
+            <param name="signed">True if you want positive or negative distance. False if you only want the absolute value.</param>
+            <returns>The distance between the vectors in the measurement units used.</returns>
+        </member>
+        <member name="M:LightBuzz.Calculations.Distance(LightBuzz.Vector3D,LightBuzz.Vector3D)">
+            <summary>
+            Calculates the distace between the specified vectors in the 3D space.
+            </summary>
+            <param name="start">The starting point/vector.</param>
+            <param name="end">The end point/vector.</param>
+            <returns>The distance between the vectors in the measurement units used.</returns>
+        </member>
+        <member name="M:LightBuzz.Calculations.Distance(LightBuzz.Vector3D,LightBuzz.Vector3D,LightBuzz.Axis)">
+            <summary>
+            Calclulates the distance between the specified points in the specified axis.
+            </summary>
+            <param name="start">The first point/vector.</param>
+            <param name="end">The second point/vector.</param>
+            <param name="axis">The axis to measure the distance in.</param>
+            <returns>The distance between the vectors in the measurement units used.</returns>
+        </member>
+        <member name="M:LightBuzz.Calculations.Distance(LightBuzz.Vector3D,LightBuzz.Vector3D,LightBuzz.Axis,System.Boolean)">
+            <summary>
+            Calclulates the distance between the specified points in the specified axis.
+            </summary>
+            <param name="start">The first point/vector.</param>
+            <param name="end">The second point/vector.</param>
+            <param name="axis">The axis to measure the distance in.</param>
+            <param name="signed">True if you want positive or negative distance. False if you only want the absolute value.</param>
+            <returns>The distance between the vectors in the measurement units used.</returns>
+        </member>
+        <member name="M:LightBuzz.Calculations.Angle(LightBuzz.Vector2D,LightBuzz.Vector2D,LightBuzz.Vector2D)">
+            <summary>
+            Calculates the angle between the specified vectors in the 2D space.
+            </summary>
+            <param name="center">The center of the angle.</param>
+            <param name="start">The start of the angle.</param>
+            <param name="end">The end of the angle.</param>
+            <returns>The angle (in degrees).</returns>
+        </member>
+        <member name="M:LightBuzz.Calculations.Angle(LightBuzz.Vector3D,LightBuzz.Vector3D,LightBuzz.Vector3D)">
+            <summary>
+            Calculates the angle between the specified vectors in the 3D space.
+            </summary>
+            <param name="center">The center of the angle.</param>
+            <param name="start">The start of the angle.</param>
+            <param name="end">The end of the angle.</param>
+            <returns>The angle (in degrees).</returns>
+        </member>
+        <member name="M:LightBuzz.Calculations.Angle(LightBuzz.Vector3D,LightBuzz.Vector3D,LightBuzz.Vector3D,LightBuzz.Axis)">
+            <summary>
+            Calculates the angle between the specified vectors around the specified axis.
+            </summary>
+            <param name="center">The center of the angle.</param>
+            <param name="start">The start of the angle.</param>
+            <param name="end">The end of the angle.</param>
+            <param name="axis">The axis around which the angle is calculated.</param>
+            <returns>The angle (in degrees).</returns>
+        </member>
+        <member name="M:LightBuzz.Calculations.Angle(LightBuzz.Vector3D,LightBuzz.Vector3D,LightBuzz.Vector3D,LightBuzz.Axis,System.Boolean)">
+            <summary>
+            Calculates the angle between the specified vectors around the specified axis and determines whether the angle will be signed/unsigned and big/small.
+            </summary>
+            <param name="center">The center of the angle.</param>
+            <param name="start">The start of the angle.</param>
+            <param name="end">The end of the angle.</param>
+            <param name="axis">The axis around which the angle is calculated.</param>
+            <param name="signed">True for positive and negative angles. False for positive angles only.</param>
+            <returns>The angle (in degrees).</returns>
+        </member>
+        <member name="M:LightBuzz.Calculations.Angle(LightBuzz.Vector3D,LightBuzz.Vector3D,LightBuzz.Vector3D,LightBuzz.Axis,System.Boolean,System.Boolean)">
+            <summary>
+            Calculates the angle between the specified vectors around the specified axis and determines whether the angle will be signed/unsigned and big/small.
+            </summary>
+            <param name="center">The center of the angle.</param>
+            <param name="start">The start of the angle.</param>
+            <param name="end">The end of the angle.</param>
+            <param name="axis">The axis around which the angle is calculated.</param>
+            <param name="signed">True for positive and negative angles. False for positive angles only.</param>
+            <param name="smallAngle">True to return an angle smaller than 180 degrees (convex). False otherwise.</param>
+            <returns>The angle (in degrees).</returns>
+        </member>
+        <member name="M:LightBuzz.Calculations.Rotation(LightBuzz.Vector3D,LightBuzz.Vector3D,LightBuzz.Axis)">
+            <summary>
+            Calculates the tilt/rotation of the specified segment around the specified axis.
+            </summary>
+            <param name="first">The start of the segment.</param>
+            <param name="second">The end of the segment.</param>
+            <param name="axis">The axis.</param>
+            <returns>The rotation/tilt angle (in degrees).</returns>
+        </member>
+        <member name="M:LightBuzz.Calculations.Rotation(LightBuzz.Vector3D,LightBuzz.Vector3D,LightBuzz.Axis,System.Boolean)">
+            <summary>
+            Calculates the tilt/rotation of the specified segment around the specified axis.
+            </summary>
+            <param name="first">The start of the segment.</param>
+            <param name="second">The end of the segment.</param>
+            <param name="axis">The axis.</param>
+            <param name="signed">True for positive and negative angles. False for positive angles only.</param>
+            <returns>The rotation/tilt angle (in degrees).</returns>
+        </member>
+        <member name="M:LightBuzz.Calculations.Rotation(LightBuzz.Vector3D,LightBuzz.Vector3D,LightBuzz.Axis,System.Boolean,System.Boolean)">
+            <summary>
+            Calculates the tilt/rotation of the specified segment around the specified axis.
+            </summary>
+            <param name="first">The start of the segment.</param>
+            <param name="second">The end of the segment.</param>
+            <param name="axis">The axis.</param>
+            <param name="signed">True for positive and negative angles. False for positive angles only.</param>
+            <param name="smallAngle">True to return an angle smaller than 180 degrees (convex). False otherwise.</param>
+            <returns>The rotation/tilt angle (in degrees).</returns>
+        </member>
+        <member name="T:LightBuzz.Converters">
+            <summary>
+            Converts between various units (meters, inches, rads, degrees).
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Converters.RadToDegrees">
+            <summary>
+            One Rad to Degrees.
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Converters.DegreeToRads">
+            <summary>
+            One Degree to Rads.
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Converters.MeterToInches">
+            <summary>
+            One Meter to Inches.
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Converters.InchToMeters">
+            <summary>
+            One Inch to Meters.
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Converters.MetersToCentimeters">
+            <summary>
+            One Meter to Centimeters.
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Converters.MetersToMillimeters">
+            <summary>
+            One Meter to Millimeters.
+            </summary>
+        </member>
+        <member name="M:LightBuzz.Converters.ToDegrees(System.Single)">
+            <summary>
+            Converts the specified rads to degrees.
+            </summary>
+            <param name="rads">The rads to convert.</param>
+            <returns>The corresponding value in degrees.</returns>
+        </member>
+        <member name="M:LightBuzz.Converters.ToRads(System.Single)">
+            <summary>
+            Converts the specified degrees to rads.
+            </summary>
+            <param name="degrees">The degrees to convert.</param>
+            <returns>The corresponding value in rads.</returns>
+        </member>
+        <member name="M:LightBuzz.Converters.ToInches(System.Single)">
+            <summary>
+            Converts the specified meters to inches.
+            </summary>
+            <param name="meters">The meters to convert.</param>
+            <returns>The corresponding value in inches.</returns>
+        </member>
+        <member name="M:LightBuzz.Converters.ToMeters(System.Single)">
+            <summary>
+            Converts the specified inches to meters.
+            </summary>
+            <param name="inches">The inches to convert.</param>
+            <returns>The corresponding value in meters.</returns>
+        </member>
+        <member name="M:LightBuzz.Converters.ToCentimeters(System.Single)">
+            <summary>
+            Converts the specified meters to centimeters.
+            </summary>
+            <param name="meters">The meters to convert.</param>
+            <returns>The corresponding value in centimeters.</returns>
+        </member>
+        <member name="M:LightBuzz.Converters.ToMillimeters(System.Single)">
+            <summary>
+            Converts the specified meters to millimeters.
+            </summary>
+            <param name="meters">The meters to convert.</param>
+            <returns>The corresponding value in millimeters.</returns>
+        </member>
+        <member name="T:LightBuzz.NamespaceDoc">
+            <summary>
+            LightBuzz Core SDK: Vectors, Maths, and Motion utilities.
+            </summary>
+        </member>
+        <member name="T:LightBuzz.Quaternion">
+            <summary>
+            Represents quaternions.
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Quaternion.X">
+            <summary>
+            X component of the vector.
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Quaternion.Y">
+            <summary>
+            Y component of the vector.
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Quaternion.Z">
+            <summary>
+            Z component of the vector.
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Quaternion.W">
+            <summary>
+            W component of the vector.
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Quaternion.Identity">
+            <summary>
+            The identity rotation.
+            </summary>
+        </member>
+        <member name="P:LightBuzz.Quaternion.Item(System.Int32)">
+            <summary>
+            Access the X, Y, Z, W components of the quaternion using [0], [1], [2], [3] respectively.
+            </summary>
+            <param name="index">The index of the component to access.</param>
+            <returns>The current quaternion.</returns>
+        </member>
+        <member name="P:LightBuzz.Quaternion.XYZ">
+            <summary>
+            Returns the 3D vector (X, Y, and Z values) of the current quaternion.
+            </summary>
+        </member>
+        <member name="P:LightBuzz.Quaternion.Magnitude">
+            <summary>
+            Returns the length of the current vector.
+            </summary>
+        </member>
+        <member name="P:LightBuzz.Quaternion.MagnitudeSquared">
+            <summary>
+            Returns the squared length of the current vector.
+            </summary>
+        </member>
+        <member name="P:LightBuzz.Quaternion.Length">
+            <summary>
+            Returns the length of the current vector.
+            </summary>
+        </member>
+        <member name="P:LightBuzz.Quaternion.LengthSquared">
+            <summary>
+            Returns the squared length of the current vector.
+            </summary>
+        </member>
+        <member name="P:LightBuzz.Quaternion.Normalized">
+            <summary>
+            Scale the given quaternion to unit length
+            </summary>
+        </member>
+        <member name="P:LightBuzz.Quaternion.EulerAngles">
+            <summary>
+            <param>Returns the euler angle representation of the rotation.</param>
+            </summary>
+        </member>
+        <member name="M:LightBuzz.Quaternion.Set(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Sets the X, Y, Z, and W components of the current quaternion.
+            </summary>
+            <param name="x">The new X component.</param>
+            <param name="y">The new Y component.</param>
+            <param name="z">The new Z component.</param>
+            <param name="w">The new W component.</param>
+        </member>
+        <member name="M:LightBuzz.Quaternion.Normalize">
+            <summary>
+            Makes the current vector have a magnitude of 1.
+            </summary>
+        </member>
+        <member name="M:LightBuzz.Quaternion.Rotate(LightBuzz.Vector3D)">
+            <summary>
+            Rotates the current quaternion according to the specified 3D vector.
+            </summary>
+            <param name="vector">The vector around of which to roatate.</param>
+            <returns>The resulting 3D vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Quaternion.ToString">
+            <summary>
+            Returns a string representation of the current object.
+            </summary>
+            <returns>A string representation of the current object.</returns>
+        </member>
+        <member name="M:LightBuzz.Quaternion.GetHashCode">
+            <summary>
+            Returns the hash code of the current object.
+            </summary>
+            <returns>The hash code of the current object.</returns>
+        </member>
+        <member name="M:LightBuzz.Quaternion.Equals(System.Object)">
+            <summary>
+            Determines whether the specified object is equal to the current object.
+            </summary>
+            <param name="other">The object to compare with the current object.</param>
+            <returns>True if the specified object is equal to the current object. False otherwise.</returns>
+        </member>
+        <member name="M:LightBuzz.Quaternion.#ctor(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Constructs a new quaternion with given X, Y, Z, and W components.
+            </summary>
+            <param name="x">X component of the quaternion.</param>
+            <param name="y">Y component of the quaternion.</param>
+            <param name="z">Z component of the quaternion.</param>
+            <param name="w">W component of the quaternion.</param>
+        </member>
+        <member name="M:LightBuzz.Quaternion.#ctor(LightBuzz.Vector3D,System.Single)">
+            <summary>
+            Construct a new Quaternion from vector and w components
+            </summary>
+            <param name="vector">The vector part</param>
+            <param name="w">The w part</param>
+        </member>
+        <member name="M:LightBuzz.Quaternion.Equals(LightBuzz.Quaternion,LightBuzz.Quaternion)">
+            <summary>
+            Specifies whether two quaternions are approximately equal.
+            </summary>
+            <param name="quaternion1">The first quaternion to compare.</param>
+            <param name="quaternion2">The second quaternion to compare.</param>
+            <returns>True if the quaternions are equal.</returns>
+        </member>
+        <member name="M:LightBuzz.Quaternion.Normalize(LightBuzz.Quaternion)">
+            <summary>
+            Makes the specified quaternion have a magnitude of 1.
+            </summary>
+            <param name="quaternion">The quaternion to normalize.</param>
+            <returns>The normalized quaternion.</returns>
+        </member>
+        <member name="M:LightBuzz.Quaternion.Negate(LightBuzz.Quaternion)">
+            <summary>
+            Negates every component of the specified quaternion.
+            </summary>
+            <param name="quaternion">The quaternion to negate.</param>
+            <returns>The negates quaternion.</returns>
+        </member>
+        <member name="M:LightBuzz.Quaternion.Multiply(LightBuzz.Quaternion,LightBuzz.Quaternion)">
+            <summary>
+            Multiplies a vector with another vector.
+            </summary>
+            <param name="quaternion1">The first quaternion to multiply.</param>
+            <param name="quaternion2">The second quaternion to multiply.</param>
+            <returns>The resulting quaternion.</returns>
+        </member>
+        <member name="M:LightBuzz.Quaternion.Multiply(LightBuzz.Quaternion,LightBuzz.Vector2D)">
+            <summary>
+            Multiplies the given rotation around the given point.
+            </summary>
+            <param name="rotation">The rotation.</param>
+            <param name="point">The point.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Quaternion.Multiply(LightBuzz.Quaternion,LightBuzz.Vector3D)">
+            <summary>
+            Multiplies the given rotation around the given point.
+            </summary>
+            <param name="rotation">The rotation.</param>
+            <param name="point">The point.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Quaternion.Dot(LightBuzz.Quaternion,LightBuzz.Quaternion)">
+            <summary>
+            Returns the dot product of two quaternions.
+            </summary>
+            <param name="quaternion1">The quaternion vector.</param>
+            <param name="quaternion2">The quaternion vector.</param>
+            <returns>The dot product of the quaternions.</returns>
+        </member>
+        <member name="M:LightBuzz.Quaternion.Angle(LightBuzz.Quaternion,LightBuzz.Quaternion)">
+            <summary>
+            Returns the angle (in degrees) between two quaternions.
+            </summary>
+            <param name="quaternion1">The first quaternion.</param>
+            <param name="quaternion2">The second quaternion.</param>
+            <returns>The angle between the quaternions (in degrees).</returns>
+        </member>
+        <member name="M:LightBuzz.Quaternion.Lerp(LightBuzz.Quaternion,LightBuzz.Quaternion,System.Single)">
+            <summary>
+            Linearly interpolates between two quaternions by t.
+            </summary>
+            <param name="quaternion1">The first quaternion.</param>
+            <param name="quaternion2">The second quaternion.</param>
+            <param name="t">A proportion between 0 and 1.</param>
+            <returns>The resulting quaternion.</returns>
+        </member>
+        <member name="M:LightBuzz.Quaternion.Slerp(LightBuzz.Quaternion,LightBuzz.Quaternion,System.Single)">
+            <summary>
+            Spherically interpolates between two quaternions by t.
+            </summary>
+            <param name="quaternion1">The first quaternion.</param>
+            <param name="quaternion2">The second quaternion.</param>
+            <param name="t">A proportion between 0 and 1.</param>
+            <returns>The resulting quaternion.</returns>
+        </member>
+        <member name="M:LightBuzz.Quaternion.SlerpUnclamped(LightBuzz.Quaternion,LightBuzz.Quaternion,System.Single)">
+            <summary>
+            Spherically interpolates between two quaternions by t. The parameter t is not calmped.
+            </summary>
+            <param name="quaternion1">The first quaternion.</param>
+            <param name="quaternion2">The second quaternion.</param>
+            <param name="t">A proportion.</param>
+            <returns>The resulting quaternion.</returns>
+        </member>
+        <member name="M:LightBuzz.Quaternion.Euler(System.Single,System.Single,System.Single)">
+            <summary>
+            <param>Returns a rotation that rotates Z degrees around the Z axis, X degrees around the X axis, and Y degrees around the Y axis (in that order).</param>
+            </summary>
+            <param name="x">The X degrees.</param>
+            <param name="y">The Y degrees.</param>
+            <param name="z">The Z degrees.</param>
+            <returns>The resulting quaternion.</returns>
+        </member>
+        <member name="M:LightBuzz.Quaternion.Euler(LightBuzz.Vector3D)">
+            <summary>
+            Returns a rotation that rotates Z degrees around the Z axis, X degrees around the X axis, and Y degrees around the Y axis (in that order).
+            </summary>
+            <param name="euler">The vector with the X, Y, and Z degrees of rotation.</param>
+            <returns>The resulting quaternion.</returns>
+        </member>
+        <member name="M:LightBuzz.Quaternion.LookRotation(LightBuzz.Vector3D)">
+            <summary>
+            Creates a rotation with the specified forward and upwards directions.
+            </summary>
+            <param name="forward">The direction to look in.</param>
+        </member>
+        <member name="M:LightBuzz.Quaternion.LookRotation(LightBuzz.Vector3D,LightBuzz.Vector3D)">
+            <summary>
+            Creates a rotation with the specified forward and upwards directions.
+            </summary>
+            <param name="forward">The direction to look in.</param>
+            <param name="up">The vector that defines in which direction up is.</param>
+        </member>
+        <member name="M:LightBuzz.Quaternion.FromToRotation(LightBuzz.Vector3D,LightBuzz.Vector3D)">
+            <summary>
+            Creates a rotation which rotates from towards to.
+            </summary>
+            <param name="from">From direction.</param>
+            <param name="to">To direction.</param>
+            <returns>The resulting rotation.</returns>
+        </member>
+        <member name="M:LightBuzz.Quaternion.RotateTowards(LightBuzz.Quaternion,LightBuzz.Quaternion,System.Single)">
+            <summary>
+            Rotates a rotation which rotates from towards to.
+            </summary>
+            <param name="from">From direction.</param>
+            <param name="to">To direction.</param>
+            <param name="maxDegreesDelta">The angular step.</param>
+            <returns>The resulting rotation.</returns>
+        </member>
+        <member name="M:LightBuzz.Quaternion.Inverse(LightBuzz.Quaternion)">
+            <summary>
+            Returns the inverse of rotation.
+            </summary>
+            <param name="rotation">The rotation to inverse.</param>
+            <returns>The resulting quaternion.</returns>
+        </member>
+        <member name="M:LightBuzz.Quaternion.AngleAxis(System.Single,LightBuzz.Vector3D)">
+            <summary>
+            Creates a rotation which rotates the specified angle degrees around the specified axis.
+            </summary>
+            <param name="angle">The angle to rotate.</param>
+            <param name="axis">The axis around which to rotate.</param>
+            <returns>The resulting rotation.</returns>
+        </member>
+        <member name="M:LightBuzz.Quaternion.op_Multiply(LightBuzz.Quaternion,LightBuzz.Quaternion)">
+            <summary>
+            Multiplies a quaternion by another one.
+            </summary>
+            <param name="quaternion1">The first quaternion to multiply.</param>
+            <param name="quaternion2">The second quaternion to multiply.</param>
+            <returns>The resulting quaternion.</returns>
+        </member>
+        <member name="M:LightBuzz.Quaternion.op_Multiply(LightBuzz.Quaternion,LightBuzz.Vector2D)">
+            <summary>
+            Multiplies a quaternion by a 2D point.
+            </summary>
+            <param name="rotation">The quaternion to multiply.</param>
+            <param name="point">The point to multiply.</param>
+            <returns>Te resulting point.</returns>
+        </member>
+        <member name="M:LightBuzz.Quaternion.op_Multiply(LightBuzz.Quaternion,LightBuzz.Vector3D)">
+            <summary>
+            Multiplies a quaternion by a 3D point.
+            </summary>
+            <param name="rotation">The quaternion to multiply.</param>
+            <param name="point">The point to multiply.</param>
+            <returns>Te resulting point.</returns>
+        </member>
+        <member name="M:LightBuzz.Quaternion.op_Equality(LightBuzz.Quaternion,LightBuzz.Quaternion)">
+            <summary>
+            Compares two quaternions for equality.
+            </summary>
+            <param name="quaternion1">The first quaternion to compare.</param>
+            <param name="quaternion2">The second quaternion to compare.</param>
+            <returns>True if the quaternions are approximately equal. False otherwise.</returns>
+        </member>
+        <member name="M:LightBuzz.Quaternion.op_Inequality(LightBuzz.Quaternion,LightBuzz.Quaternion)">
+            <summary>
+            Compares two quaternions for inequality.
+            </summary>
+            <param name="quaternion1">The first quaternion to compare.</param>
+            <param name="quaternion2">The second quaternion to compare.</param>
+            <returns>True if the quaternions are different. False otherwise.</returns>
+        </member>
+        <member name="M:LightBuzz.Quaternion.op_Implicit(LightBuzz.Quaternion)~UnityEngine.Quaternion">
+            <summary>
+            Converts the specified Quaternion into its equivalent Unity Quaternion.
+            </summary>
+            <param name="source">The quaternion to convert.</param>
+        </member>
+        <member name="M:LightBuzz.Quaternion.op_Implicit(UnityEngine.Quaternion)~LightBuzz.Quaternion">
+            <summary>
+            Converts the specified Unity Quaternion into its equivalent quaternion.
+            </summary>
+            <param name="source">The Unity Quaternion to convert.</param>
+        </member>
+        <member name="M:LightBuzz.Quaternion.op_Multiply(LightBuzz.Quaternion,UnityEngine.Vector3)">
+            <summary>
+            Multiplies the quaternion with a Unity 3D point.
+            </summary>
+            <param name="rotation">The quaternion to multiply.</param>
+            <param name="point">The Unity point to multiply.</param>
+            <returns>The resulting Unity Vector3 point.</returns>
+        </member>
+        <member name="T:LightBuzz.Size">
+            <summary>
+            Represents the size of an element in the 2D space.
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Size.Width">
+            <summary>
+            The width of the element.
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Size.Height">
+            <summary>
+            The height of the element.
+            </summary>
+        </member>
+        <member name="M:LightBuzz.Size.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes an element with the specified width and height.
+            </summary>
+            <param name="width">The width of the element.</param>
+            <param name="height">The height of the element.</param>
+        </member>
+        <member name="M:LightBuzz.Size.Equals(System.Object)">
+            <summary>
+            Determines whether the specified object is equal to the current object.
+            </summary>
+            <param name="other">The object to compare with the current object.</param>
+            <returns>True if the specified object is equal to the current object. False otherwise.</returns>
+        </member>
+        <member name="M:LightBuzz.Size.GetHashCode">
+            <summary>
+            Returns the hash code of the current object.
+            </summary>
+            <returns>The hash code of the current object.</returns>
+        </member>
+        <member name="M:LightBuzz.Size.ToString">
+            <summary>
+            Returns a string representation of the current object.
+            </summary>
+            <returns>A string representation of the current object.</returns>
+        </member>
+        <member name="T:LightBuzz.Vector2D">
+            <summary>
+            Represents 2D vectors and points.
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector2D.X">
+            <summary>
+            X component of the vector.
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector2D.Y">
+            <summary>
+            Y component of the vector.
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector2D.Zero">
+            <summary>
+            Shorthand for (0, 0).
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector2D.One">
+            <summary>
+            Shorthand for (1, 1).
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector2D.Right">
+            <summary>
+            Shorthand for (1, 0).
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector2D.Left">
+            <summary>
+            Shorthand for (-1, 0).
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector2D.Up">
+            <summary>
+            Shorthand for (0, 1).
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector2D.Down">
+            <summary>
+            Shorthand for (0, -1).
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector2D.PositiveInfinity">
+            <summary>
+            Shorthand for (+∞, +∞).
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector2D.NegativeInfinity">
+            <summary>
+            Shorthand for (-∞, -∞).
+            </summary>
+        </member>
+        <member name="P:LightBuzz.Vector2D.Item(System.Int32)">
+            <summary>
+            Access the X, Y components of the vector using [0], [1] respectively.
+            </summary>
+            <param name="index">The index of the component to access.</param>
+            <returns>The current vector.</returns>
+        </member>
+        <member name="P:LightBuzz.Vector2D.Length">
+            <summary>
+            Returns the length of the current vector.
+            </summary>
+        </member>
+        <member name="P:LightBuzz.Vector2D.LengthSquared">
+            <summary>
+            Returns the squared length of the current vector.
+            </summary>
+        </member>
+        <member name="P:LightBuzz.Vector2D.Magnitude">
+            <summary>
+            Returns the length of the current vector.
+            </summary>
+        </member>
+        <member name="P:LightBuzz.Vector2D.MagnitudeSquared">
+            <summary>
+            Returns the squared length of the current vector.
+            </summary>
+        </member>
+        <member name="P:LightBuzz.Vector2D.Normalized">
+            <summary>
+            Returns the current vector with a length of 1.
+            </summary>
+        </member>
+        <member name="M:LightBuzz.Vector2D.#ctor(System.Single,System.Single)">
+            <summary>
+            Constructs a new vector with given X and Y components.
+            </summary>
+            <param name="x">X component of the vector.</param>
+            <param name="y">Y component of the vector.</param>
+        </member>
+        <member name="M:LightBuzz.Vector2D.Set(System.Single,System.Single)">
+            <summary>
+            Sets the X and Y components of the current vector.
+            </summary>
+            <param name="x">The new X component.</param>
+            <param name="y">The new Y component.</param>
+        </member>
+        <member name="M:LightBuzz.Vector2D.Negate">
+            <summary>
+            Negates every component of the current vector.
+            </summary>
+        </member>
+        <member name="M:LightBuzz.Vector2D.Normalize">
+            <summary>
+            Makes the current vector have a magnitude of 1.
+            </summary>
+        </member>
+        <member name="M:LightBuzz.Vector2D.Add(LightBuzz.Vector2D)">
+            <summary>
+            Adds the specified vector to the current one.
+            </summary>
+            <param name="vector">The vector to add.</param>
+        </member>
+        <member name="M:LightBuzz.Vector2D.Subtract(LightBuzz.Vector2D)">
+            <summary>
+            Subtracts the specified vector from the current one.
+            </summary>
+            <param name="vector">The vector to subtract.</param>
+        </member>
+        <member name="M:LightBuzz.Vector2D.Multiply(System.Single)">
+            <summary>
+            Multiplies the specified vector with the specified number.
+            </summary>
+            <param name="number">The number to multiply the vector with.</param>
+        </member>
+        <member name="M:LightBuzz.Vector2D.Divide(System.Single)">
+            <summary>
+            Divides the current vector by the specified number.
+            </summary>
+            <param name="number">The number to divide the vector with.</param>
+        </member>
+        <member name="M:LightBuzz.Vector2D.Distance(LightBuzz.Vector2D)">
+            <summary>
+            Returns the distance between the current vector and the specified vector.
+            </summary>
+            <param name="vector">The vector</param>
+            <returns>The distance between the vectors.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.Angle(LightBuzz.Vector2D)">
+            <summary>
+            Returns the angle (in degrees) between the current and the specified vector.
+            </summary>
+            <param name="vector">The vector.</param>
+            <returns>The angle between the vectors (in degrees).</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.Lerp(LightBuzz.Vector2D,System.Single)">
+            <summary>
+            Linearly interpolates between the current and the specified vector by t.
+            </summary>
+            <param name="vector">The vector to interpolate with.</param>
+            <param name="t">A proportion between 0 and 1.</param>
+        </member>
+        <member name="M:LightBuzz.Vector2D.ToString">
+            <summary>
+            Returns a string representation of the current object.
+            </summary>
+            <returns>A string representation of the current object.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.GetHashCode">
+            <summary>
+            Returns the hash code of the current object.
+            </summary>
+            <returns>The hash code of the current object.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.Equals(System.Object)">
+            <summary>
+            Determines whether the specified object is equal to the current object.
+            </summary>
+            <param name="other">The object to compare with the current object.</param>
+            <returns>True if the specified object is equal to the current object. False otherwise.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.Equals(LightBuzz.Vector2D,LightBuzz.Vector2D)">
+            <summary>
+            Specifies whether two vectors are approximately equal.
+            </summary>
+            <param name="vector1">The first vector to compare.</param>
+            <param name="vector2">The second vector to compare.</param>
+            <returns>True if the vectors are equal.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.Normalize(LightBuzz.Vector2D)">
+            <summary>
+            Makes the specified vector have a magnitude of 1.
+            </summary>
+            <param name="vector">The vector to normalize.</param>
+            <returns>The normalized vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.Negate(LightBuzz.Vector2D)">
+            <summary>
+            Negates every component of the specified vector.
+            </summary>
+            <param name="vector">The vector to negate.</param>
+            <returns>The negated vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.Add(LightBuzz.Vector2D,LightBuzz.Vector2D)">
+            <summary>
+            Adds two vectors.
+            </summary>
+            <param name="vector1">The first vector to add.</param>
+            <param name="vector2">The second vector to add.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.Subtract(LightBuzz.Vector2D,LightBuzz.Vector2D)">
+            <summary>
+            Subtracts the second vector from the first vector.
+            </summary>
+            <param name="vector1">The vector to subtract from.</param>
+            <param name="vector2">The vector to subtract.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.Multiply(LightBuzz.Vector2D,System.Single)">
+            <summary>
+            Multiplies a vector by a number.
+            </summary>
+            <param name="vector1">The specified vector.</param>
+            <param name="scalar">The number to multiply with.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.Multiply(System.Single,LightBuzz.Vector2D)">
+            <summary>
+            Multiplies a vector by a number.
+            </summary>
+            <param name="scalar">The number to multiply with.</param>
+            <param name="vector">The specified vector.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.Divide(LightBuzz.Vector2D,System.Single)">
+            <summary>
+            Divides a vector by a number.
+            </summary>
+            <param name="vector1">The specified vector.</param>
+            <param name="scalar">The number to divide with.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.Dot(LightBuzz.Vector2D,LightBuzz.Vector2D)">
+            <summary>
+            Returns the dot product of two vectors.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <returns>The dot product of the vectors.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.Distance(LightBuzz.Vector2D,LightBuzz.Vector2D)">
+            <summary>
+            Returns the distance between two vectors.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <returns>The distance of the vectors.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.Angle(LightBuzz.Vector2D,LightBuzz.Vector2D)">
+            <summary>
+            Returns the angle (in degrees) between two vectors.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <returns>The angle between the vectors (in degrees).</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.Lerp(LightBuzz.Vector2D,LightBuzz.Vector2D,System.Single)">
+            <summary>
+            Linearly interpolates between two vectors by t.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <param name="t">A proportion between 0 and 1.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.Max(LightBuzz.Vector2D,LightBuzz.Vector2D)">
+            <summary>
+            Returns the vector with the maximum length.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <returns>The vector with the higher magnitude.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.Min(LightBuzz.Vector2D,LightBuzz.Vector2D)">
+            <summary>
+            Returns the vector with the minimum length.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <returns>The vector with the lower magnitude.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.op_Addition(LightBuzz.Vector2D,LightBuzz.Vector2D)">
+            <summary>
+            Adds two vectors.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.op_Subtraction(LightBuzz.Vector2D,LightBuzz.Vector2D)">
+            <summary>
+            Subtracts one vector from another.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.op_UnaryNegation(LightBuzz.Vector2D)">
+            <summary>
+            Negates a vector.
+            </summary>
+            <param name="vector">The vector to negate.</param>
+            <returns>The negated vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.op_Multiply(LightBuzz.Vector2D,System.Single)">
+            <summary>
+            Multiplies a vector by a number.
+            </summary>
+            <param name="vector">The vector to multiply.</param>
+            <param name="number">The number to multiply.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.op_Multiply(System.Single,LightBuzz.Vector2D)">
+            <summary>
+            Multiplies a number by a vector.
+            </summary>
+            <param name="number">The number to multiply.</param>
+            <param name="vector">The vector to multiply.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.op_Division(LightBuzz.Vector2D,System.Single)">
+            <summary>
+            Divides a vector by a number.
+            </summary>
+            <param name="vector">The vector to divide.</param>
+            <param name="number">The number by which the vector will be divided.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.op_Equality(LightBuzz.Vector2D,LightBuzz.Vector2D)">
+            <summary>
+            Compares two vectors for equality.
+            </summary>
+            <param name="vector1">The first vector to compare.</param>
+            <param name="vector2">The second vector to compare.</param>
+            <returns>True if the vectors are approximately equal. False otherwise.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.op_Inequality(LightBuzz.Vector2D,LightBuzz.Vector2D)">
+            <summary>
+            Compares two vectors for inequality.
+            </summary>
+            <param name="vector1">The first vector to compare.</param>
+            <param name="vector2">The second vector to compare.</param>
+            <returns>True if the vectors are different. False otherwise.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.op_LessThan(LightBuzz.Vector2D,LightBuzz.Vector2D)">
+            <summary>
+            Compares the lengths of two vectors.
+            </summary>
+            <param name="vector1">The first vector to compare.</param>
+            <param name="vector2">The second vector to compare.</param>
+            <returns>True if the length of the first vector is smaller than the length of the second vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.op_LessThanOrEqual(LightBuzz.Vector2D,LightBuzz.Vector2D)">
+            <summary>
+            Compares the lengths of two vectors.
+            </summary>
+            <param name="vector1">The first vector to compare.</param>
+            <param name="vector2">The second vector to compare.</param>
+            <returns>True if the length of the first vector is smaller than or equal to the length of the second vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.op_GreaterThan(LightBuzz.Vector2D,LightBuzz.Vector2D)">
+            <summary>
+            Compares the lengths of two vectors.
+            </summary>
+            <param name="vector1">The first vector to compare.</param>
+            <param name="vector2">The second vector to compare.</param>
+            <returns>True if the length of the first vector is greater than the length of the second vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.op_GreaterThanOrEqual(LightBuzz.Vector2D,LightBuzz.Vector2D)">
+            <summary>
+            Compares the lengths of two vectors.
+            </summary>
+            <param name="vector1">The first vector to compare.</param>
+            <param name="vector2">The second vector to compare.</param>
+            <returns>True if the length of the first vector is greater than or equal to the length of the second vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector2D.op_Implicit(LightBuzz.Vector3D)~LightBuzz.Vector2D">
+            <summary>
+            Converts the specified 3D vector into its equivalent 2D vector.
+            </summary>
+            <param name="source">The 2D vector to convert.</param>
+        </member>
+        <member name="M:LightBuzz.Vector2D.op_Implicit(LightBuzz.Vector4D)~LightBuzz.Vector2D">
+            <summary>
+            Converts the specified 4D vector into its equivalent 2D vector.
+            </summary>
+            <param name="source">The 2D vector to convert.</param>
+        </member>
+        <member name="M:LightBuzz.Vector2D.op_Implicit(LightBuzz.Vector2D)~UnityEngine.Vector2">
+            <summary>
+            Converts the specified 2D vector into its equivalent Unity Vector2.
+            </summary>
+            <param name="source">The 2D vector to convert.</param>
+        </member>
+        <member name="M:LightBuzz.Vector2D.op_Implicit(UnityEngine.Vector2)~LightBuzz.Vector2D">
+            <summary>
+            Converts the specified Unity Vector2 into its equivalent 2D vector.
+            </summary>
+            <param name="source">The Unity Vector2 to convert.</param>
+        </member>
+        <member name="M:LightBuzz.Vector2D.op_Implicit(LightBuzz.Vector2D)~UnityEngine.Vector3">
+            <summary>
+            Converts the specified 2D vector into its equivalent Unity Vector3.
+            </summary>
+            <param name="source">The 2D vector to convert.</param>
+        </member>
+        <member name="M:LightBuzz.Vector2D.op_Implicit(UnityEngine.Vector3)~LightBuzz.Vector2D">
+            <summary>
+            Converts the specified Unity Vector3 into its equivalent 2D vector.
+            </summary>
+            <param name="source">The Unity Vector3 to convert.</param>
+        </member>
+        <member name="T:LightBuzz.Vector3D">
+            <summary>
+            Represents 3D vectors and points.
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector3D.X">
+            <summary>
+            X component of the vector.
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector3D.Y">
+            <summary>
+            Y component of the vector.
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector3D.Z">
+            <summary>
+            Z component of the vector.
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector3D.Zero">
+            <summary>
+            Shorthand for (0, 0, 0).
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector3D.One">
+            <summary>
+            Shorthand for (1, 1, 1).
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector3D.Right">
+            <summary>
+            Shorthand for (1, 0, 0).
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector3D.Left">
+            <summary>
+            Shorthand for (-1, 0, 0).
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector3D.Up">
+            <summary>
+            Shorthand for (0, 1, 0).
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector3D.Down">
+            <summary>
+            Shorthand for (0, -1, 0).
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector3D.Forward">
+            <summary>
+            Shorthand for (0, 0, 1).
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector3D.Back">
+            <summary>
+            Shorthand for (0, 0, -1).
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector3D.PositiveInfinity">
+            <summary>
+            Shorthand for (+∞, +∞, +∞).
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector3D.NegativeInfinity">
+            <summary>
+            Shorthand for (-∞, -∞, -∞).
+            </summary>
+        </member>
+        <member name="P:LightBuzz.Vector3D.Item(System.Int32)">
+            <summary>
+            Access the X, Y, Z components of the vector using [0], [1], [2] respectively.
+            </summary>
+            <param name="index">The index of the component to access.</param>
+            <returns>The current vector.</returns>
+        </member>
+        <member name="P:LightBuzz.Vector3D.Length">
+            <summary>
+            Returns the length of the current vector.
+            </summary>
+        </member>
+        <member name="P:LightBuzz.Vector3D.LengthSquared">
+            <summary>
+            Returns the squared length of the current vector.
+            </summary>
+        </member>
+        <member name="P:LightBuzz.Vector3D.Magnitude">
+            <summary>
+            Returns the length of the current vector.
+            </summary>
+        </member>
+        <member name="P:LightBuzz.Vector3D.MagnitudeSquared">
+            <summary>
+            Returns the squared length of the current vector.
+            </summary>
+        </member>
+        <member name="P:LightBuzz.Vector3D.Normalized">
+            <summary>
+            Returns the current vector with a length of 1.
+            </summary>
+        </member>
+        <member name="M:LightBuzz.Vector3D.#ctor(System.Single,System.Single)">
+            <summary>
+            Constructs a new vector with given X and Y components.
+            </summary>
+            <param name="x">X component of the vector.</param>
+            <param name="y">Y component of the vector.</param>
+        </member>
+        <member name="M:LightBuzz.Vector3D.#ctor(System.Single,System.Single,System.Single)">
+            <summary>
+            Constructs a new vector with given X, Y, and Z components.
+            </summary>
+            <param name="x">X component of the vector.</param>
+            <param name="y">Y component of the vector.</param>
+            <param name="z">Z component of the vector.</param>
+        </member>
+        <member name="M:LightBuzz.Vector3D.Set(System.Single,System.Single,System.Single)">
+            <summary>
+            Sets the X, Y and Z components of the current vector.
+            </summary>
+            <param name="x">The new X component.</param>
+            <param name="y">The new Y component.</param>
+            <param name="z">The new Z component.</param>
+        </member>
+        <member name="M:LightBuzz.Vector3D.Negate">
+            <summary>
+            Negates every component of the current vector.
+            </summary>
+        </member>
+        <member name="M:LightBuzz.Vector3D.Normalize">
+            <summary>
+            Makes the current vector have a magnitude of 1.
+            </summary>
+        </member>
+        <member name="M:LightBuzz.Vector3D.Distance(LightBuzz.Vector3D)">
+            <summary>
+            Returns the distance between the current vector and the specified vector.
+            </summary>
+            <param name="vector">The vector</param>
+            <returns>The distance between the vectors.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.Angle(LightBuzz.Vector3D)">
+            <summary>
+            Returns the angle (in degrees) between the current and the specified vector.
+            </summary>
+            <param name="vector">The vector.</param>
+            <returns>The angle between the vectors (in degrees).</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.ToString">
+            <summary>
+            Returns a string representation of the current object.
+            </summary>
+            <returns>A string representation of the current object.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.GetHashCode">
+            <summary>
+            Returns the hash code of the current object.
+            </summary>
+            <returns>The hash code of the current object.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.Equals(System.Object)">
+            <summary>
+            Determines whether the specified object is equal to the current object.
+            </summary>
+            <param name="other">The object to compare with the current object.</param>
+            <returns>True if the specified object is equal to the current object. False otherwise.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.Equals(LightBuzz.Vector3D,LightBuzz.Vector3D)">
+            <summary>
+            Specifies whether two vectors are approximately equal.
+            </summary>
+            <param name="vector1">The first vector to compare.</param>
+            <param name="vector2">The second vector to compare.</param>
+            <returns>True if the vectors are equal.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.Normalize(LightBuzz.Vector3D)">
+            <summary>
+            Makes the specified vector have a magnitude of 1.
+            </summary>
+            <param name="vector">The vector to normalize.</param>
+            <returns>The normalized vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.Negate(LightBuzz.Vector3D)">
+            <summary>
+            Negates every component of the specified vector.
+            </summary>
+            <param name="vector">The vector to negate.</param>
+            <returns>The negates vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.Add(LightBuzz.Vector3D,LightBuzz.Vector3D)">
+            <summary>
+            Adds two vectors.
+            </summary>
+            <param name="vector1">The first vector to add.</param>
+            <param name="vector2">The second vector to add.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.Subtract(LightBuzz.Vector3D,LightBuzz.Vector3D)">
+            <summary>
+            Subtracts the second vector from the first vector.
+            </summary>
+            <param name="vector1">The vector to subtract from.</param>
+            <param name="vector2">The vector to subtract.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.Multiply(LightBuzz.Vector3D,System.Single)">
+            <summary>
+            Multiplies a vector by a number.
+            </summary>
+            <param name="vector">The specified vector.</param>
+            <param name="number">The number to multiply with.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.Multiply(System.Single,LightBuzz.Vector3D)">
+            <summary>
+            Multiplies a vector by a number.
+            </summary>
+            <param name="number">The number to multiply with.</param>
+            <param name="vector">The specified vector.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.Divide(LightBuzz.Vector3D,System.Single)">
+            <summary>
+            Divides a vector by a number.
+            </summary>
+            <param name="vector1">The specified vector.</param>
+            <param name="number">The number to divide with.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.Dot(LightBuzz.Vector3D,LightBuzz.Vector3D)">
+            <summary>
+            Returns the dot product of two vectors.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <returns>The dot product of the vectors.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.Cross(LightBuzz.Vector3D,LightBuzz.Vector3D)">
+            <summary>
+            Returns the cross product of two vectors.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <returns>The cross product of the vectors.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.Distance(LightBuzz.Vector3D,LightBuzz.Vector3D)">
+            <summary>
+            Returns the distance between two vectors.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <returns>The distance of the vectors.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.Angle(LightBuzz.Vector3D,LightBuzz.Vector3D)">
+            <summary>
+            Returns the angle (in degrees) between two vectors.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <returns>The angle between the vectors (in degrees).</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.Lerp(LightBuzz.Vector3D,LightBuzz.Vector3D,System.Single)">
+            <summary>
+            Linearly interpolates between two vectors by t.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <param name="t">A proportion between 0 and 1.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.Max(LightBuzz.Vector3D,LightBuzz.Vector3D)">
+            <summary>
+            Returns the vector with the maximum length.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <returns>The vector with the higher magnitude.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.Min(LightBuzz.Vector3D,LightBuzz.Vector3D)">
+            <summary>
+            Returns the vector with the minimum length.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <returns>The vector with the lower magnitude.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.Pitch(LightBuzz.Vector3D,System.Single)">
+            <summary>
+            Pitch.
+            </summary>
+            <param name="vector">The vector to pitch.</param>
+            <param name="degree">The degrees of rotation.</param>
+            <returns>The rotated vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.Yaw(LightBuzz.Vector3D,System.Single)">
+            <summary>
+            Yaw.
+            </summary>
+            <param name="vector">The vector to yaw.</param>
+            <param name="degree">The degrees of rotation.</param>
+            <returns>The rotated vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.Roll(LightBuzz.Vector3D,System.Single)">
+            <summary>
+            Roll.
+            </summary>
+            <param name="vector">The vector to roll.</param>
+            <param name="degree">The degrees of rotation.</param>
+            <returns>The rotated vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.op_Addition(LightBuzz.Vector3D,LightBuzz.Vector3D)">
+            <summary>
+            Adds two vectors.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.op_Subtraction(LightBuzz.Vector3D,LightBuzz.Vector3D)">
+            <summary>
+            Subtracts one vector from another.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.op_UnaryNegation(LightBuzz.Vector3D)">
+            <summary>
+            Negates a vector.
+            </summary>
+            <param name="vector">The vector to negate.</param>
+            <returns>The negated vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.op_Multiply(LightBuzz.Vector3D,System.Single)">
+            <summary>
+            Multiplies a vector by a number.
+            </summary>
+            <param name="vector">The vector to multiply.</param>
+            <param name="number">The number to multiply.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.op_Multiply(System.Single,LightBuzz.Vector3D)">
+            <summary>
+            Multiplies a number by a vector.
+            </summary>
+            <param name="number">The number to multiply.</param>
+            <param name="vector">The vector to multiply.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.op_Division(LightBuzz.Vector3D,System.Single)">
+            <summary>
+            Divides a vector by a number.
+            </summary>
+            <param name="vector">The vector to divide.</param>
+            <param name="number">The number by which the vector will be divided.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.op_Equality(LightBuzz.Vector3D,LightBuzz.Vector3D)">
+            <summary>
+            Compares two vectors for equality.
+            </summary>
+            <param name="vector1">The first vector to compare.</param>
+            <param name="vector2">The second vector to compare.</param>
+            <returns>True if the vectors are approximately equal. False otherwise.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.op_Inequality(LightBuzz.Vector3D,LightBuzz.Vector3D)">
+            <summary>
+            Compares two vectors for inequality.
+            </summary>
+            <param name="vector1">The first vector to compare.</param>
+            <param name="vector2">The second vector to compare.</param>
+            <returns>True if the vectors are different. False otherwise.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.op_LessThan(LightBuzz.Vector3D,LightBuzz.Vector3D)">
+            <summary>
+            Compares the lengths of two vectors.
+            </summary>
+            <param name="vector1">The first vector to compare.</param>
+            <param name="vector2">The second vector to compare.</param>
+            <returns>True if the length of the first vector is smaller than the length of the second vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.op_LessThanOrEqual(LightBuzz.Vector3D,LightBuzz.Vector3D)">
+            <summary>
+            Compares the lengths of two vectors.
+            </summary>
+            <param name="vector1">The first vector to compare.</param>
+            <param name="vector2">The second vector to compare.</param>
+            <returns>True if the length of the first vector is smaller than or equal to the length of the second vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.op_GreaterThan(LightBuzz.Vector3D,LightBuzz.Vector3D)">
+            <summary>
+            Compares the lengths of two vectors.
+            </summary>
+            <param name="vector1">The first vector to compare.</param>
+            <param name="vector2">The second vector to compare.</param>
+            <returns>True if the length of the first vector is greater than the length of the second vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.op_GreaterThanOrEqual(LightBuzz.Vector3D,LightBuzz.Vector3D)">
+            <summary>
+            Compares the lengths of two vectors.
+            </summary>
+            <param name="vector1">The first vector to compare.</param>
+            <param name="vector2">The second vector to compare.</param>
+            <returns>True if the length of the first vector is greater than or equal to the length of the second vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector3D.op_Implicit(LightBuzz.Vector2D)~LightBuzz.Vector3D">
+            <summary>
+            Converts the specified 2D vector into its equivalent 3D vector.
+            </summary>
+            <param name="source">The 3D vector to convert.</param>
+        </member>
+        <member name="M:LightBuzz.Vector3D.op_Implicit(LightBuzz.Vector4D)~LightBuzz.Vector3D">
+            <summary>
+            Converts the specified 4D vector into its equivalent 3D vector.
+            </summary>
+            <param name="source">The 3D vector to convert.</param>
+        </member>
+        <member name="M:LightBuzz.Vector3D.op_Implicit(LightBuzz.Vector3D)~UnityEngine.Vector3">
+            <summary>
+            Converts the specified 3D vector into its equivalent Unity Vector3.
+            </summary>
+            <param name="source">The 4D vector to convert.</param>
+        </member>
+        <member name="M:LightBuzz.Vector3D.op_Implicit(UnityEngine.Vector3)~LightBuzz.Vector3D">
+            <summary>
+            Converts the specified Unity Vector3 into its equivalent 3D vector.
+            </summary>
+            <param name="source">The 3D vector to convert.</param>
+        </member>
+        <member name="T:LightBuzz.Vector4D">
+            <summary>
+            Represents 4D vectors and points.
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector4D.X">
+            <summary>
+            X component of the vector.
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector4D.Y">
+            <summary>
+            Y component of the vector.
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector4D.Z">
+            <summary>
+            Z component of the vector.
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector4D.W">
+            <summary>
+            W component of the vector.
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector4D.Zero">
+            <summary>
+            Shorthand for (0, 0, 0, 0).
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector4D.One">
+            <summary>
+            Shorthand for (1, 1, 1, 1).
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector4D.PositiveInfinity">
+            <summary>
+            Shorthand for (+∞, +∞, +∞, +∞).
+            </summary>
+        </member>
+        <member name="F:LightBuzz.Vector4D.NegativeInfinity">
+            <summary>
+            Shorthand for (-∞, -∞, -∞, -∞).
+            </summary>
+        </member>
+        <member name="P:LightBuzz.Vector4D.Item(System.Int32)">
+            <summary>
+            Access the X, Y, Z, W components of the vector using [0], [1], [2], [3] respectively.
+            </summary>
+            <param name="index">The index of the component to access.</param>
+            <returns>The current vector.</returns>
+        </member>
+        <member name="P:LightBuzz.Vector4D.Length">
+            <summary>
+            Returns the length of the current vector.
+            </summary>
+        </member>
+        <member name="P:LightBuzz.Vector4D.LengthSquared">
+            <summary>
+            Returns the squared length of the current vector.
+            </summary>
+        </member>
+        <member name="P:LightBuzz.Vector4D.Magnitude">
+            <summary>
+            Returns the length of the current vector.
+            </summary>
+        </member>
+        <member name="P:LightBuzz.Vector4D.MagnitudeSquared">
+            <summary>
+            Returns the squared length of the current vector.
+            </summary>
+        </member>
+        <member name="M:LightBuzz.Vector4D.#ctor(System.Single,System.Single)">
+            <summary>
+            Constructs a new vector with given X and Y components.
+            </summary>
+            <param name="x">X component of the vector.</param>
+            <param name="y">Y component of the vector.</param>
+        </member>
+        <member name="M:LightBuzz.Vector4D.#ctor(System.Single,System.Single,System.Single)">
+            <summary>
+            Constructs a new vector with given X, Y, and Z components.
+            </summary>
+            <param name="x">X component of the vector.</param>
+            <param name="y">Y component of the vector.</param>
+            <param name="z">Z component of the vector.</param>
+        </member>
+        <member name="M:LightBuzz.Vector4D.#ctor(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Constructs a new vector with given X, Y, Z, and W components.
+            </summary>
+            <param name="x">X component of the vector.</param>
+            <param name="y">Y component of the vector.</param>
+            <param name="z">Z component of the vector.</param>
+            <param name="w">W component of the vector.</param>
+        </member>
+        <member name="M:LightBuzz.Vector4D.Set(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Sets the X, Y, Z, and W components of the current vector.
+            </summary>
+            <param name="x">The new X component.</param>
+            <param name="y">The new Y component.</param>
+            <param name="z">The new Z component.</param>
+            <param name="w">The new W component.</param>
+        </member>
+        <member name="M:LightBuzz.Vector4D.Normalize">
+            <summary>
+            Makes the current vector have a magnitude of 1.
+            </summary>
+        </member>
+        <member name="M:LightBuzz.Vector4D.ToString">
+            <summary>
+            Returns a string representation of the current object.
+            </summary>
+            <returns>A string representation of the current object.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector4D.GetHashCode">
+            <summary>
+            Returns the hash code of the current object.
+            </summary>
+            <returns>The hash code of the current object.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector4D.Equals(System.Object)">
+            <summary>
+            Determines whether the specified object is equal to the current object.
+            </summary>
+            <param name="other">The object to compare with the current object.</param>
+            <returns>True if the specified object is equal to the current object. False otherwise.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector4D.Equals(LightBuzz.Vector4D,LightBuzz.Vector4D)">
+            <summary>
+            Specifies whether two vectors are approximately equal.
+            </summary>
+            <param name="vector1">The first vector to compare.</param>
+            <param name="vector2">The second vector to compare.</param>
+            <returns>True if the vectors are equal. False otherwise.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector4D.Normalize(LightBuzz.Vector4D)">
+            <summary>
+            Makes the specified vector have a magnitude of 1.
+            </summary>
+            <param name="vector">The vector to normalize.</param>
+            <returns>The normalized vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector4D.Negate(LightBuzz.Vector4D)">
+            <summary>
+            Negates every component of the specified vector.
+            </summary>
+            <param name="vector">The vector to negate.</param>
+            <returns>The negates vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector4D.Add(LightBuzz.Vector4D,LightBuzz.Vector4D)">
+            <summary>
+            Adds two vectors.
+            </summary>
+            <param name="vector1">The first vector to add.</param>
+            <param name="vector2">The second vector to add.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector4D.Subtract(LightBuzz.Vector4D,LightBuzz.Vector4D)">
+            <summary>
+            Subtracts the second vector from the first vector.
+            </summary>
+            <param name="vector1">The vector to subtract from.</param>
+            <param name="vector2">The vector to subtract.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector4D.Multiply(LightBuzz.Vector4D,System.Single)">
+            <summary>
+            Multiplies a vector by a number.
+            </summary>
+            <param name="vector">The specified vector.</param>
+            <param name="number">The number to multiply with.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector4D.Multiply(System.Single,LightBuzz.Vector4D)">
+            <summary>
+            Multiplies a vector by a number.
+            </summary>
+            <param name="number">The number to multiply with.</param>
+            <param name="vector">The specified vector.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector4D.Multiply(LightBuzz.Vector4D,LightBuzz.Vector4D)">
+            <summary>
+            Multiplies a vector with another vector.
+            </summary>
+            <param name="vector1">The first vector to multiply.</param>
+            <param name="vector2">The second vector to multiply.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector4D.Multiply(LightBuzz.Vector4D,LightBuzz.Vector3D)">
+            <summary>
+            Multiplies the given rotation around the given point.
+            </summary>
+            <param name="rotation">The rotation.</param>
+            <param name="point">The point.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector4D.Divide(LightBuzz.Vector4D,System.Single)">
+            <summary>
+            Divides a vector by a number.
+            </summary>
+            <param name="vector">The specified vector.</param>
+            <param name="number">The number to divide with.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector4D.Dot(LightBuzz.Vector4D,LightBuzz.Vector4D)">
+            <summary>
+            Returns the dot product of two vectors.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <returns>The dot product of the vectors.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector4D.Angle(LightBuzz.Vector4D,LightBuzz.Vector4D)">
+            <summary>
+            Returns the angle (in degrees) between two vectors.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <returns>The angle between the vectors (in degrees).</returns>
+        </member>
+        <member name="M:LightBuzz.Vector4D.Lerp(LightBuzz.Vector4D,LightBuzz.Vector4D,System.Single)">
+            <summary>
+            Linearly interpolates between two vectors by t.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <param name="t">A proportion between 0 and 1.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector4D.op_Addition(LightBuzz.Vector4D,LightBuzz.Vector4D)">
+            <summary>
+            Adds two vectors.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector4D.op_Subtraction(LightBuzz.Vector4D,LightBuzz.Vector4D)">
+            <summary>
+            Subtracts one vector from another.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector4D.op_UnaryNegation(LightBuzz.Vector4D)">
+            <summary>
+            Negates a vector.
+            </summary>
+            <param name="vector">The vector to negate.</param>
+            <returns>The negated vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector4D.op_Multiply(LightBuzz.Vector4D,System.Single)">
+            <summary>
+            Multiplies a vector by a number.
+            </summary>
+            <param name="vector">The vector to multiply.</param>
+            <param name="number">The number to multiply.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector4D.op_Multiply(System.Single,LightBuzz.Vector4D)">
+            <summary>
+            Multiplies a number by a vector.
+            </summary>
+            <param name="number">The number to multiply.</param>
+            <param name="vector">The vector to multiply.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector4D.op_Multiply(LightBuzz.Vector4D,LightBuzz.Vector4D)">
+            <summary>
+            Multiplies a vector by another one.
+            </summary>
+            <param name="vector1">The first vector to multiply.</param>
+            <param name="vector2">The second vector to multiply.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector4D.op_Multiply(LightBuzz.Vector4D,LightBuzz.Vector3D)">
+            <summary>
+            Multiplies a 4D vector by 3D point.
+            </summary>
+            <param name="rotation">The 4D vector to multiply.</param>
+            <param name="point">The 3D point to multiply.</param>
+            <returns>The resulting 3D vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector4D.op_Division(LightBuzz.Vector4D,System.Single)">
+            <summary>
+            Divides a vector by a number.
+            </summary>
+            <param name="vector">The vector to divide.</param>
+            <param name="number">The number by which the vector will be divided.</param>
+            <returns>The resulting vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector4D.op_Equality(LightBuzz.Vector4D,LightBuzz.Vector4D)">
+            <summary>
+            Compares two vectors for equality.
+            </summary>
+            <param name="vector1">The first vector to compare.</param>
+            <param name="vector2">The second vector to compare.</param>
+            <returns>True if the vectors are approximately equal. False otherwise.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector4D.op_Inequality(LightBuzz.Vector4D,LightBuzz.Vector4D)">
+            <summary>
+            Compares two vectors for inequality.
+            </summary>
+            <param name="vector1">The first vector to compare.</param>
+            <param name="vector2">The second vector to compare.</param>
+            <returns>True if the vectors are different. False otherwise.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector4D.op_LessThan(LightBuzz.Vector4D,LightBuzz.Vector4D)">
+            <summary>
+            Compares the lengths of two vectors.
+            </summary>
+            <param name="vector1">The first vector to compare.</param>
+            <param name="vector2">The second vector to compare.</param>
+            <returns>True if the length of the first vector is smaller than the length of the second vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector4D.op_LessThanOrEqual(LightBuzz.Vector4D,LightBuzz.Vector4D)">
+            <summary>
+            Compares the lengths of two vectors.
+            </summary>
+            <param name="vector1">The first vector to compare.</param>
+            <param name="vector2">The second vector to compare.</param>
+            <returns>True if the length of the first vector is smaller than or equal to the length of the second vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector4D.op_GreaterThan(LightBuzz.Vector4D,LightBuzz.Vector4D)">
+            <summary>
+            Compares the lengths of two vectors.
+            </summary>
+            <param name="vector1">The first vector to compare.</param>
+            <param name="vector2">The second vector to compare.</param>
+            <returns>True if the length of the first vector is greater than the length of the second vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector4D.op_GreaterThanOrEqual(LightBuzz.Vector4D,LightBuzz.Vector4D)">
+            <summary>
+            Compares the lengths of two vectors.
+            </summary>
+            <param name="vector1">The first vector to compare.</param>
+            <param name="vector2">The second vector to compare.</param>
+            <returns>True if the length of the first vector is greater than or equal to the length of the second vector.</returns>
+        </member>
+        <member name="M:LightBuzz.Vector4D.op_Implicit(LightBuzz.Vector3D)~LightBuzz.Vector4D">
+            <summary>
+            Converts the specified 3D vector into its equivalent 4D vector.
+            </summary>
+            <param name="source">The 3D vector to convert.</param>
+        </member>
+        <member name="M:LightBuzz.Vector4D.op_Implicit(LightBuzz.Vector2D)~LightBuzz.Vector4D">
+            <summary>
+            Converts the specified 2D vector into its equivalent 4D vector.
+            </summary>
+            <param name="source">The 2D vector to convert.</param>
+        </member>
+        <member name="M:LightBuzz.Vector4D.op_Implicit(LightBuzz.Vector4D)~UnityEngine.Vector4">
+            <summary>
+            Converts the specified 4D vector into its equivalent Unity Vector4.
+            </summary>
+            <param name="source">The 4D vector to convert.</param>
+        </member>
+        <member name="M:LightBuzz.Vector4D.op_Implicit(UnityEngine.Vector4)~LightBuzz.Vector4D">
+            <summary>
+            Converts the specified Unity Vector4 into its equivalent 4D vector.
+            </summary>
+            <param name="source">The Unity Vector4 to convert.</param>
+        </member>
+        <member name="M:LightBuzz.Vector4D.op_Implicit(LightBuzz.Vector4D)~UnityEngine.Quaternion">
+            <summary>
+            Converts the specified 4D vector into its equivalent Unity Quaternion.
+            </summary>
+            <param name="source">The 4D vector to convert.</param>
+        </member>
+        <member name="M:LightBuzz.Vector4D.op_Implicit(UnityEngine.Quaternion)~LightBuzz.Vector4D">
+            <summary>
+            Converts the specified Unity Quaternion into its equivalent 4D vector.
+            </summary>
+            <param name="source">The Unity Quaternion to convert.</param>
+        </member>
+    </members>
+</doc>

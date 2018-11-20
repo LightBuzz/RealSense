@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.106
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightBuzz.RealSense", "LightBuzz.RealSense\LightBuzz.RealSense.csproj", "{57B1971A-F1CF-4429-9448-CFD8993D560C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightBuzz.RealSense.Unity", "LightBuzz.RealSense.Unity\LightBuzz.RealSense.Unity.csproj", "{434C8C47-022D-4DDD-8413-14FF2BB0115E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{57B1971A-F1CF-4429-9448-CFD8993D560C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57B1971A-F1CF-4429-9448-CFD8993D560C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57B1971A-F1CF-4429-9448-CFD8993D560C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57B1971A-F1CF-4429-9448-CFD8993D560C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{434C8C47-022D-4DDD-8413-14FF2BB0115E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{434C8C47-022D-4DDD-8413-14FF2BB0115E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{434C8C47-022D-4DDD-8413-14FF2BB0115E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{434C8C47-022D-4DDD-8413-14FF2BB0115E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A2176517-76FF-4B51-AB10-FC2733BBCD6A}
+	EndGlobalSection
+EndGlobal
