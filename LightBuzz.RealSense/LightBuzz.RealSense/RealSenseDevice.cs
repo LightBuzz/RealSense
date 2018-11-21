@@ -10,51 +10,85 @@ namespace LightBuzz.RealSense
     /// </summary>
     public class RealSenseDevice
     {
+        #region Constants
+
+        private readonly AutoResetEvent _stopEvent = new AutoResetEvent(false);
+
+        #endregion
+
+        #region Members
+        
+        private Pipeline _pipeline;
+        private Thread _worker;
+
+        #endregion
+
+        #region Events
+
         /// <summary>
-        /// Notifies upon streaming start
+        /// Reaised when streaming starts.
         /// </summary>
         public event Action<PipelineProfile> OnStart;
 
         /// <summary>
-        /// Notifies when streaming has stopped
+        /// Raised when streaming stops.
         /// </summary>
         public event Action OnStop;
 
         /// <summary>
-        /// Fired when a new frame is available
+        /// Raised when a new frame set is available
         /// </summary>
-        public event Action<Frame> OnFrameArrive;
+        public event Action<FrameSet> OnFrameSetArrived;
 
         /// <summary>
-        /// Fired when a new frame set is available
+        /// Raised when a color frame is available.
         /// </summary>
-        public event Action<FrameSet> OnFrameSetArrive;
+        public event Action<VideoFrame> OnColorFrameArrived;
 
         /// <summary>
-        /// User configuration
+        /// Raised when a depth frame is available.
         /// </summary>
-        public DeviceConfiguration DeviceConfiguration = new DeviceConfiguration
-        {
-            mode = DeviceConfiguration.Mode.Live,
-            RequestedSerialNumber = string.Empty,
-            Profiles = new VideoStreamRequest[]
-            {
-                new VideoStreamRequest {Stream = Stream.Depth, StreamIndex = -1, Width = 640, Height = 480, Format = Format.Z16 , Framerate = 0 },
-                new VideoStreamRequest {Stream = Stream.Infrared, StreamIndex = -1, Width = 640, Height = 480, Format = Format.Y8 , Framerate = 0 },
-                new VideoStreamRequest {Stream = Stream.Color, StreamIndex = -1, Width = 640, Height = 480, Format = Format.Rgb8 , Framerate = 0 }
-            }
-        };
+        public event Action<DepthFrame> OnDepthFrameArrived;
 
+        /// <summary>
+        /// Raised when an infrared frame is available.
+        /// </summary>
+        public event Action<VideoFrame> OnInfraredFrameArrived;
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Determines whether the device is streaming frames.
+        /// </summary>
         public bool Streaming { get; protected set; }
+
+        /// <summary>
+        /// The active profile of the RealSense camera.
+        /// </summary>
         public PipelineProfile ActiveProfile { get; protected set; }
 
-        private Pipeline _pipeline;
-        private Thread _worker;
-        private readonly AutoResetEvent _stopEvent = new AutoResetEvent(false);
+        /// <summary>
+        /// The current device configuration.
+        /// </summary>
+        public DeviceConfiguration DeviceConfiguration { get; set; }
 
+        #endregion
+
+        #region Public methods
+
+        /// <summary>
+        /// Opens the RealSense device.
+        /// </summary>
         public void Open()
         {
             _pipeline = new Pipeline();
+
+            if (DeviceConfiguration == null)
+            {
+                DeviceConfiguration = DeviceConfiguration.Default();
+            }
 
             using (var cfg = DeviceConfiguration.ToPipelineConfig())
             {
@@ -79,10 +113,15 @@ namespace LightBuzz.RealSense
             OnStart?.Invoke(ActiveProfile);
         }
 
+        /// <summary>
+        /// Closes the sensor and disposes any resources.
+        /// </summary>
         public void Close()
         {
-            OnFrameSetArrive = null;
-            OnFrameArrive = null;
+            OnFrameSetArrived = null;
+            OnColorFrameArrived = null;
+            OnDepthFrameArrived = null;
+            OnInfraredFrameArrived = null;
 
             if (_worker != null)
             {
@@ -91,7 +130,9 @@ namespace LightBuzz.RealSense
             }
 
             if (Streaming && OnStop != null)
+            {
                 OnStop();
+            }
 
             if (_pipeline != null)
             {
@@ -119,22 +160,39 @@ namespace LightBuzz.RealSense
             _pipeline = null;
         }
 
-        /// <summary>
-        /// Worker Thread for multithreaded operations
-        /// </summary>
+        #endregion
+
+        #region Private methods
+
         private void WaitForFrames()
         {
             while (!_stopEvent.WaitOne(0))
             {
-                //using (var frames = _pipeline.WaitForFrames())
-                //using (var frame = frames.AsFrame())
-                //    OnFrameArrive?.Invoke(frame);
-
-                using (var frames = _pipeline.WaitForFrames())
+                using (FrameSet set = _pipeline.WaitForFrames())
                 {
-                    OnFrameSetArrive?.Invoke(frames);
+                    OnFrameSetArrived?.Invoke(set);
+
+                    foreach (Frame frame in set)
+                    {
+                        if (frame.Profile.Stream == Stream.Color)
+                        {
+                            OnColorFrameArrived?.Invoke(frame as VideoFrame);
+                        }
+
+                        if (frame.Profile.Stream == Stream.Depth)
+                        {
+                            OnDepthFrameArrived?.Invoke(frame as DepthFrame);
+                        }
+
+                        if (frame.Profile.Stream == Stream.Infrared)
+                        {
+                            OnInfraredFrameArrived?.Invoke(frame as VideoFrame);
+                        }
+                    }
                 }
             }
         }
+
+        #endregion
     }
 }
