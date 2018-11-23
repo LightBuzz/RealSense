@@ -143,6 +143,35 @@ namespace LightBuzz.RealSense
             return Create(colorIntrinsics, colorExtrinsics, depthIntrinsics, depthExtrinsics);
         }
 
+        public static CoordinateMapper Create(PipelineProfile pipeline, DeviceConfiguration configuration)
+        {
+            if (configuration == null)
+            {
+                return Create(pipeline);
+            }
+
+            int colorWidth = DefaultColorWidth;
+            int colorHeight = DefaultColorHeight;
+            int depthWidth = DefaultDepthWidth;
+            int depthHeight = DefaultDepthHeight;
+
+            foreach (var profile in configuration.Profiles)
+            {
+                if (profile.Stream == Stream.Color)
+                {
+                    colorWidth = profile.Width;
+                    colorHeight = profile.Height;
+                }
+                if (profile.Stream == Stream.Depth)
+                {
+                    depthWidth = profile.Width;
+                    depthHeight = profile.Height;
+                }
+            }
+
+            return Create(pipeline, colorWidth, colorHeight, depthWidth, depthHeight);
+        }
+
         /// <summary>
         /// Instantiates a new coordinate mapper for the specified pipeline.
         /// </summary>
@@ -151,6 +180,13 @@ namespace LightBuzz.RealSense
         public static CoordinateMapper Create(PipelineProfile pipeline)
         {
             return Create(pipeline, DefaultColorWidth, DefaultColorHeight, DefaultDepthWidth, DefaultDepthHeight);
+        }
+
+        public static CoordinateMapper Create(RealSenseDevice device)
+        {
+            if (device == null) return null;
+
+            return Create(device.ActiveProfile, device.DeviceConfiguration);
         }
 
         /// <summary>

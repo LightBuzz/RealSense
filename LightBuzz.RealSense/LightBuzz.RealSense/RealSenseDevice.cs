@@ -74,6 +74,11 @@ namespace LightBuzz.RealSense
         /// </summary>
         public DeviceConfiguration DeviceConfiguration { get; set; }
 
+        /// <summary>
+        /// The coordinate mapper of the current device.
+        /// </summary>
+        public CoordinateMapper CoordinateMapper { get; protected set; }
+
         #endregion
 
         #region Public methods
@@ -99,6 +104,8 @@ namespace LightBuzz.RealSense
             {
                 DeviceConfiguration.Profiles = activeStreams.Select(VideoStreamRequest.FromProfile).ToArray();
             }
+                        
+            CoordinateMapper = CoordinateMapper.Create(this);
 
             _stopEvent.Reset();
 
