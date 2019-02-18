@@ -178,24 +178,6 @@ namespace LightBuzz.RealSense
                 using (FrameSet set = _pipeline.WaitForFrames())
                 {
                     OnFrameSetArrived?.Invoke(set);
-
-                    foreach (Frame frame in set)
-                    {
-                        if (frame.Profile.Stream == Stream.Color)
-                        {
-                            OnColorFrameArrived?.Invoke(frame as VideoFrame);
-                        }
-
-                        if (frame.Profile.Stream == Stream.Depth)
-                        {
-                            OnDepthFrameArrived?.Invoke(frame as DepthFrame);
-                        }
-
-                        if (frame.Profile.Stream == Stream.Infrared)
-                        {
-                            OnInfraredFrameArrived?.Invoke(frame as VideoFrame);
-                        }
-                    }
                 }
             }
         }
