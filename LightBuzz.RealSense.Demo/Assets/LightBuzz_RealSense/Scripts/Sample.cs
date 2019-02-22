@@ -15,13 +15,14 @@ public class Sample : MonoBehaviour
     private RealSenseDevice device;
     private Align aligner;
 
-    private DateTime dateColor= DateTime.MinValue;
+    private DateTime dateColor = DateTime.MinValue;
     private DateTime dateDepth = DateTime.MinValue;
 
     private int countColor;
     private int countDepth;
 
     private byte[] colorData;
+    private ushort[] depthData;
     private Texture2D texture;
 
     private bool frameArrived;
@@ -36,6 +37,7 @@ public class Sample : MonoBehaviour
         aligner = new Align(Stream.Color);
 
         colorData = new byte[640 * 480 * 3];
+        depthData = new ushort[640 * 480];
         texture = new Texture2D(640, 480, TextureFormat.RGB24, false);
         image.texture = texture;
     }
@@ -44,9 +46,13 @@ public class Sample : MonoBehaviour
     {
         if (device != null)
         {
+            device.OnFrameSetArrived -= Device_OnFrameSetArrived;
             device.Close();
         }
     }
+
+    int x = 640 / 2;
+    int y = 480 / 2;
 
     private void Update()
     {
@@ -55,7 +61,15 @@ public class Sample : MonoBehaviour
             texture.LoadRawTextureData(colorData);
             texture.Apply(false);
 
-            log.text = depth.ToString();
+            log.text = Math.Round(depth, 1).ToString("N1");
+        }
+
+        Vector3 mouse = Input.mousePosition;
+
+        if (mouse.x >= 0f && mouse.x <= 640f && mouse.y >= 0f && mouse.y <= 480f)
+        {
+            x = (int)mouse.x;
+            y = 480 - (int)mouse.y;
         }
     }
 
@@ -66,8 +80,9 @@ public class Sample : MonoBehaviour
         using (DepthFrame depthFrame = frames.DepthFrame)
         {
             colorFrame.CopyTo(colorData);
+            depthFrame.CopyTo(depthData);
 
-            depth = depthFrame.GetDistance(colorFrame.Width / 2, colorFrame.Height / 2);
+            depth = depthFrame.GetDistance(x, y);
 
             frameArrived = true;
         }
