@@ -1,6 +1,7 @@
 ﻿using Intel.RealSense;
 using LightBuzz.RealSense;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,10 @@ public class Sample : MonoBehaviour
 
     [SerializeField]
     private Text log;
+
+    [SerializeField]
+    [Range(1, 20)]
+    private int radius = 4;
 
     private RealSenseDevice device;
     private Align aligner;
@@ -27,6 +32,10 @@ public class Sample : MonoBehaviour
 
     private bool frameArrived;
     private float depth;
+    private float depthMedian;
+
+    private int x = 640 / 2;
+    private int y = 480 / 2;
 
     private void Start()
     {
@@ -34,7 +43,7 @@ public class Sample : MonoBehaviour
         device.OnFrameSetArrived += Device_OnFrameSetArrived;
         device.Open();
 
-        aligner = new Align(Stream.Color);
+        aligner = new Align(Stream.Depth);
 
         colorData = new byte[640 * 480 * 3];
         depthData = new ushort[640 * 480];
@@ -51,9 +60,6 @@ public class Sample : MonoBehaviour
         }
     }
 
-    int x = 640 / 2;
-    int y = 480 / 2;
-
     private void Update()
     {
         if (frameArrived)
@@ -61,7 +67,10 @@ public class Sample : MonoBehaviour
             texture.LoadRawTextureData(colorData);
             texture.Apply(false);
 
-            log.text = Math.Round(depth, 1).ToString("N1");
+            log.text = 
+                Math.Round(depth, 1).ToString("N1") + 
+                Environment.NewLine +
+                Math.Round(depthMedian, 1).ToString("N1");
         }
 
         Vector3 mouse = Input.mousePosition;
@@ -75,14 +84,17 @@ public class Sample : MonoBehaviour
 
     private void Device_OnFrameSetArrived(FrameSet obj)
     {
-        using (FrameSet frames = aligner.Process(obj))
-        using (VideoFrame colorFrame = frames.ColorFrame)
-        using (DepthFrame depthFrame = frames.DepthFrame)
+        using (VideoFrame colorFrame = obj.ColorFrame)
         {
             colorFrame.CopyTo(colorData);
+        }
+        using (FrameSet frames = aligner.Process(obj))
+        using (DepthFrame depthFrame = frames.DepthFrame)
+        {
             depthFrame.CopyTo(depthData);
 
             depth = depthFrame.GetDistance(x, y);
+            depthMedian = MedianDepth();
 
             frameArrived = true;
         }
@@ -112,5 +124,46 @@ public class Sample : MonoBehaviour
         //        countDepth = 0;
         //    }
         //}
+    }
+
+    private float MedianDepth()
+    {
+        const int minimum = 0;
+        const int maximum = 5000;
+
+        float result = depth;
+
+        List<ushort> values = new List<ushort>();
+
+        int xMin = x - radius >= 0 ? x - radius : 0;
+        int xMax = x + radius <= 640 ? x + radius : 640;
+        int yMin = y - radius >= 0 ? y - radius : 0;
+        int yMax = y + radius <= 480 ? y + radius : 480;
+
+        for (int iX = xMin; iX < xMax; iX++)
+        {
+            for (int iY = yMin; iY < yMax; iY++)
+            {
+                ushort current = depthData[iY * 640 + iX];
+
+                if (current > minimum && current < maximum)
+                {
+                    values.Add(current);
+                }
+            }
+        }
+
+        if (values.Count > 0)
+        {
+            foreach (ushort value in values)
+            {
+                result += value;
+            }
+
+            result /= values.Count;
+            result /= 1000f;
+        }
+
+        return result;
     }
 }
