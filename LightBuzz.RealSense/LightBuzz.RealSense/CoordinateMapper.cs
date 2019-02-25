@@ -101,7 +101,7 @@ namespace LightBuzz.RealSense
         #region Static Methods
 
         /// <summary>
-        /// Instantiates a new coordinate mapper for the specified pipeline.
+        /// Creates a new coordinate mapper for the specified pipeline.
         /// </summary>
         /// <param name="pipeline">The specified pipeline.</param>
         /// <param name="colorWidth">The desired color frame width.</param>
@@ -143,6 +143,12 @@ namespace LightBuzz.RealSense
             return Create(colorIntrinsics, colorExtrinsics, depthIntrinsics, depthExtrinsics);
         }
 
+        /// <summary>
+        /// Creates a new coordinate mapper for the specified pipeline and configuration.
+        /// </summary>
+        /// <param name="pipeline">The specified pipeline.</param>
+        /// <param name="configuration">The specified configuration.</param>
+        /// <returns>The coordinate mapper of the current pipline and configuration, if all of the supported streams were found. Null otherwise.</returns>
         public static CoordinateMapper Create(PipelineProfile pipeline, DeviceConfiguration configuration)
         {
             if (configuration == null)
@@ -173,15 +179,20 @@ namespace LightBuzz.RealSense
         }
 
         /// <summary>
-        /// Instantiates a new coordinate mapper for the specified pipeline.
+        /// Creates a new coordinate mapper for the specified pipeline.
         /// </summary>
         /// <param name="pipeline">The specified pipeline.</param>
-        /// <returns>The color/depth coordinate mapper of the current pipline, if all of the supported streams were found. Null otherwise.</returns>
+        /// <returns>The coordinate mapper of the current pipline, if all of the supported streams were found. Null otherwise.</returns>
         public static CoordinateMapper Create(PipelineProfile pipeline)
         {
             return Create(pipeline, DefaultColorWidth, DefaultColorHeight, DefaultDepthWidth, DefaultDepthHeight);
         }
 
+        /// <summary>
+        /// Creates a new coordinate mapper for the specified device.
+        /// </summary>
+        /// <param name="device">The RealSense device to use.</param>
+        /// <returns>The coordinate mapper that corresponds to the given device.</returns>
         public static CoordinateMapper Create(RealSenseDevice device)
         {
             if (device == null) return null;
@@ -190,13 +201,13 @@ namespace LightBuzz.RealSense
         }
 
         /// <summary>
-        /// Instantiates a new coordinate mapper with the specified intrinsics and extrinsics parameters.
+        /// Creates a new coordinate mapper with the specified intrinsics and extrinsics parameters.
         /// </summary>
         /// <param name="colorIntrinsics">The color intrinsics.</param>
         /// <param name="colorExtrinsics">The color extrinsics.</param>
         /// <param name="depthIntrinsics">The depth intrinsics.</param>
         /// <param name="depthExtrinsics">The depth extrinsics.</param>
-        /// <returns></returns>
+        /// <returns>The coordinate mapper with the given intrinsics and extrinsics.</returns>
         public static CoordinateMapper Create(Intrinsics colorIntrinsics, Extrinsics colorExtrinsics, Intrinsics depthIntrinsics, Extrinsics depthExtrinsics)
         {
             return new CoordinateMapper
