@@ -69,43 +69,169 @@ namespace LightBuzz.RealSense
             return cfg;
         }
 
-        public static DeviceConfiguration Default()
+        public VideoStreamRequest ColorProfile
         {
-            return new DeviceConfiguration
+            get
             {
-                Mode = VideoStreamMode.Live,
-                RequestedSerialNumber = string.Empty,
-                Profiles = new VideoStreamRequest[]
+                foreach (VideoStreamRequest profile in Profiles)
                 {
-                    new VideoStreamRequest
+                    if (profile.Stream == Stream.Color)
                     {
-                        Stream = Stream.Depth,
-                        StreamIndex = -1,
-                        Width = 640,
-                        Height = 480,
-                        Format = Format.Z16,
-                        Framerate = 0
-                    },
-                    new VideoStreamRequest
-                    {
-                        Stream = Stream.Infrared,
-                        StreamIndex = -1,
-                        Width = 640,
-                        Height = 480,
-                        Format = Format.Y8,
-                        Framerate = 0
-                    },
-                    new VideoStreamRequest
-                    {
-                        Stream = Stream.Color,
-                        StreamIndex = -1,
-                        Width = 640,
-                        Height = 480,
-                        Format = Format.Rgb8,
-                        Framerate = 0
+                        return profile;
                     }
                 }
-            };
+
+                return new VideoStreamRequest();
+            }
         }
+
+        public VideoStreamRequest DepthProfile
+        {
+            get
+            {
+                foreach (VideoStreamRequest profile in Profiles)
+                {
+                    if (profile.Stream == Stream.Depth)
+                    {
+                        return profile;
+                    }
+                }
+
+                return new VideoStreamRequest();
+            }
+        }
+
+        public VideoStreamRequest InfraredProfile
+        {
+            get
+            {
+                foreach (VideoStreamRequest profile in Profiles)
+                {
+                    if (profile.Stream == Stream.Infrared)
+                    {
+                        return profile;
+                    }
+                }
+
+                return new VideoStreamRequest();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static DeviceConfiguration Default()
+        {
+            return Configuration_640x480;
+        }
+
+        public static readonly DeviceConfiguration Configuration_640x360 = new DeviceConfiguration
+        {
+            Mode = VideoStreamMode.Live,
+            RequestedSerialNumber = string.Empty,
+            Profiles = new VideoStreamRequest[]
+            {
+                new VideoStreamRequest
+                {
+                    Stream = Stream.Depth,
+                    StreamIndex = -1,
+                    Width = 640,
+                    Height = 360,
+                    Format = Format.Z16,
+                    Framerate = 0
+                },
+                new VideoStreamRequest
+                {
+                    Stream = Stream.Infrared,
+                    StreamIndex = -1,
+                    Width = 640,
+                    Height = 360,
+                    Format = Format.Y8,
+                    Framerate = 0
+                },
+                new VideoStreamRequest
+                {
+                    Stream = Stream.Color,
+                    StreamIndex = -1,
+                    Width = 640,
+                    Height = 360,
+                    Format = Format.Rgb8,
+                    Framerate = 0
+                }
+            }
+        };
+
+        public static readonly DeviceConfiguration Configuration_640x480 = new DeviceConfiguration
+        {
+            Mode = VideoStreamMode.Live,
+            RequestedSerialNumber = string.Empty,
+            Profiles = new VideoStreamRequest[]
+            {
+                new VideoStreamRequest
+                {
+                    Stream = Stream.Depth,
+                    StreamIndex = -1,
+                    Width = 640,
+                    Height = 480,
+                    Format = Format.Z16,
+                    Framerate = 0
+                },
+                new VideoStreamRequest
+                {
+                    Stream = Stream.Infrared,
+                    StreamIndex = -1,
+                    Width = 640,
+                    Height = 480,
+                    Format = Format.Y8,
+                    Framerate = 0
+                },
+                new VideoStreamRequest
+                {
+                    Stream = Stream.Color,
+                    StreamIndex = -1,
+                    Width = 640,
+                    Height = 480,
+                    Format = Format.Rgb8,
+                    Framerate = 0
+                }
+            }
+        };
+
+        public static readonly DeviceConfiguration Configuration_1280x720 = new DeviceConfiguration
+        {
+            Mode = VideoStreamMode.Live,
+            RequestedSerialNumber = string.Empty,
+            Profiles = new VideoStreamRequest[]
+            {
+                new VideoStreamRequest
+                {
+                    Stream = Stream.Depth,
+                    StreamIndex = -1,
+                    Width = 1280,
+                    Height = 720,
+                    Format = Format.Z16,
+                    Framerate = 0
+                },
+                new VideoStreamRequest
+                {
+                    Stream = Stream.Infrared,
+                    StreamIndex = -1,
+                    Width = 1280,
+                    Height = 720,
+                    Format = Format.Y8,
+                    Framerate = 0
+                },
+                new VideoStreamRequest
+                {
+                    Stream = Stream.Color,
+                    StreamIndex = -1,
+                    Width = 1280,
+                    Height = 720,
+                    Format = Format.Rgb8,
+                    Framerate = 0
+                }
+            }
+        };
     }
 }
