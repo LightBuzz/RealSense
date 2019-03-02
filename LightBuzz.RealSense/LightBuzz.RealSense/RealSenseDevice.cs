@@ -19,41 +19,19 @@ namespace LightBuzz.RealSense
         #region Members
         
         private Pipeline _pipeline;
+        private Align _aligner;
         private Thread _worker;
+
+        private FrameData _frameData;
 
         #endregion
 
         #region Events
 
         /// <summary>
-        /// Reaised when streaming starts.
+        /// Raised when updated color and depth data are available.
         /// </summary>
-        public event Action<PipelineProfile> OnStart;
-
-        /// <summary>
-        /// Raised when streaming stops.
-        /// </summary>
-        public event Action OnStop;
-
-        /// <summary>
-        /// Raised when a new frame set is available
-        /// </summary>
-        public event Action<FrameSet> OnFrameSetArrived;
-
-        /// <summary>
-        /// Raised when a color frame is available.
-        /// </summary>
-        public event Action<VideoFrame> OnColorFrameArrived;
-
-        /// <summary>
-        /// Raised when a depth frame is available.
-        /// </summary>
-        public event Action<DepthFrame> OnDepthFrameArrived;
-
-        /// <summary>
-        /// Raised when an infrared frame is available.
-        /// </summary>
-        public event Action<VideoFrame> OnInfraredFrameArrived;
+        public event Action<FrameData> OnFrameDataArrived;
 
         #endregion
 
@@ -104,6 +82,14 @@ namespace LightBuzz.RealSense
             {
                 DeviceConfiguration.Profiles = activeStreams.Select(VideoStreamRequest.FromProfile).ToArray();
             }
+
+            _aligner = new Align(Stream.Depth);
+
+            _frameData = new FrameData
+            {
+                ColorData = new byte[DeviceConfiguration.ColorProfile.Width * DeviceConfiguration.ColorProfile.Height * 3],
+                DepthData = new ushort[DeviceConfiguration.DepthProfile.Width * DeviceConfiguration.DepthProfile.Height]
+            };
                         
             CoordinateMapper = CoordinateMapper.Create(this);
 
@@ -116,8 +102,6 @@ namespace LightBuzz.RealSense
             _worker.Start();
 
             Streaming = true;
-
-            OnStart?.Invoke(ActiveProfile);
         }
 
         /// <summary>
@@ -125,10 +109,7 @@ namespace LightBuzz.RealSense
         /// </summary>
         public void Close()
         {
-            OnFrameSetArrived = null;
-            OnColorFrameArrived = null;
-            OnDepthFrameArrived = null;
-            OnInfraredFrameArrived = null;
+            OnFrameDataArrived = null;
 
             if (_worker != null)
             {
@@ -136,15 +117,13 @@ namespace LightBuzz.RealSense
                 _worker.Join();
             }
 
-            if (Streaming && OnStop != null)
-            {
-                OnStop();
-            }
-
             if (_pipeline != null)
             {
                 if (Streaming)
+                {
                     _pipeline.Stop();
+                }
+
                 _pipeline.Release();
                 _pipeline = null;
             }
@@ -156,8 +135,6 @@ namespace LightBuzz.RealSense
                 ActiveProfile.Dispose();
                 ActiveProfile = null;
             }
-
-            OnStop = null;
 
             if (_pipeline != null)
             {
@@ -177,11 +154,30 @@ namespace LightBuzz.RealSense
             {
                 using (FrameSet set = _pipeline.WaitForFrames())
                 {
-                    OnFrameSetArrived?.Invoke(set);
+                    //OnFrameSetArrived?.Invoke(set);
+
+                    using (VideoFrame colorFrame = set.ColorFrame)
+                    {
+                        colorFrame.CopyTo(_frameData.ColorData);
+                    }
+                    using (FrameSet processed = _aligner.Process(set))
+                    using (DepthFrame depthFrame = processed.DepthFrame)
+                    {
+                        depthFrame.CopyTo(_frameData.DepthData);
+                    }
+
+                    OnFrameDataArrived?.Invoke(_frameData);
                 }
             }
         }
 
         #endregion
+    }
+
+    public class FrameData
+    {
+        public byte[] ColorData { get; set; }
+
+        public ushort[] DepthData { get; set; }
     }
 }

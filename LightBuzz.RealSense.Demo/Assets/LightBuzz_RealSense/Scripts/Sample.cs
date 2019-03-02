@@ -18,7 +18,6 @@ public class Sample : MonoBehaviour
     private int radius = 4;
 
     private RealSenseDevice device;
-    private Align aligner;
 
     private DateTime dateColor = DateTime.MinValue;
     private DateTime dateDepth = DateTime.MinValue;
@@ -40,10 +39,9 @@ public class Sample : MonoBehaviour
     private void Start()
     {
         device = new RealSenseDevice();
-        device.OnFrameSetArrived += Device_OnFrameSetArrived;
+        device.OnFrameDataArrived += Device_OnFrameDataArrived;
+        //device.OnFrameSetArrived += Device_OnFrameSetArrived;
         device.Open();
-
-        aligner = new Align(Stream.Depth);
 
         colorData = new byte[640 * 480 * 3];
         depthData = new ushort[640 * 480];
@@ -82,22 +80,43 @@ public class Sample : MonoBehaviour
         }
     }
 
+    private void Device_OnFrameDataArrived(FrameData obj)
+    {
+        frameArrived = true;
+
+        colorData = obj.ColorData;
+        depthData = obj.DepthData;
+
+        depth = depthData[y * 640 + x] / 1000f;
+        depthMedian = MedianDepth();
+
+        countColor++;
+
+        if ((DateTime.Now - dateColor).Seconds >= 1)
+        {
+            Debug.Log("Color: " + countColor);
+
+            dateColor = DateTime.Now;
+            countColor = 0;
+        }
+    }
+
     private void Device_OnFrameSetArrived(FrameSet obj)
     {
-        using (VideoFrame colorFrame = obj.ColorFrame)
-        {
-            colorFrame.CopyTo(colorData);
-        }
-        using (FrameSet frames = aligner.Process(obj))
-        using (DepthFrame depthFrame = frames.DepthFrame)
-        {
-            depthFrame.CopyTo(depthData);
+        //using (VideoFrame colorFrame = obj.ColorFrame)
+        //{
+        //    colorFrame.CopyTo(colorData);
+        //}
+        //using (FrameSet frames = aligner.Process(obj))
+        //using (DepthFrame depthFrame = frames.DepthFrame)
+        //{
+        //    depthFrame.CopyTo(depthData);
 
-            depth = depthFrame.GetDistance(x, y);
-            depthMedian = MedianDepth();
+        //    depth = depthFrame.GetDistance(x, y);
+        //    depthMedian = MedianDepth();
 
-            frameArrived = true;
-        }
+        //    frameArrived = true;
+        //}
 
         //using (VideoFrame frame = obj.ColorFrame)
         //{
