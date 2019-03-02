@@ -29,7 +29,6 @@ public class Sample : MonoBehaviour
     private ushort[] depthData;
     private Texture2D texture;
 
-    private bool frameArrived;
     private float depth;
     private float depthMedian;
 
@@ -40,7 +39,7 @@ public class Sample : MonoBehaviour
     {
         device = new RealSenseDevice();
         device.OnFrameDataArrived += Device_OnFrameDataArrived;
-        //device.OnFrameSetArrived += Device_OnFrameSetArrived;
+        device.OnRecordingCompleted += Device_OnRecordingCompleted;
         device.Open();
 
         colorData = new byte[640 * 480 * 3];
@@ -53,14 +52,15 @@ public class Sample : MonoBehaviour
     {
         if (device != null)
         {
-            device.OnFrameSetArrived -= Device_OnFrameSetArrived;
+            device.OnFrameDataArrived -= Device_OnFrameDataArrived;
+            device.OnRecordingCompleted -= Device_OnRecordingCompleted;
             device.Close();
         }
     }
 
     private void Update()
     {
-        if (frameArrived)
+        if (device.FrameDataArrived)
         {
             texture.LoadRawTextureData(colorData);
             texture.Apply(false);
@@ -80,12 +80,10 @@ public class Sample : MonoBehaviour
         }
     }
 
-    private void Device_OnFrameDataArrived(FrameData obj)
+    private void Device_OnFrameDataArrived(AlignedFrameData data)
     {
-        frameArrived = true;
-
-        colorData = obj.ColorData;
-        depthData = obj.DepthData;
+        colorData = data.ColorData;
+        depthData = data.DepthData;
 
         depth = depthData[y * 640 + x] / 1000f;
         depthMedian = MedianDepth();
@@ -101,48 +99,9 @@ public class Sample : MonoBehaviour
         }
     }
 
-    private void Device_OnFrameSetArrived(FrameSet obj)
+    private void Device_OnRecordingCompleted()
     {
-        //using (VideoFrame colorFrame = obj.ColorFrame)
-        //{
-        //    colorFrame.CopyTo(colorData);
-        //}
-        //using (FrameSet frames = aligner.Process(obj))
-        //using (DepthFrame depthFrame = frames.DepthFrame)
-        //{
-        //    depthFrame.CopyTo(depthData);
-
-        //    depth = depthFrame.GetDistance(x, y);
-        //    depthMedian = MedianDepth();
-
-        //    frameArrived = true;
-        //}
-
-        //using (VideoFrame frame = obj.ColorFrame)
-        //{
-        //    countColor++;
-
-        //    if ((DateTime.Now - dateColor).Seconds >= 1)
-        //    {
-        //        Debug.Log("Color: " + countColor);
-
-        //        dateColor = DateTime.Now;
-        //        countColor = 0;
-        //    }
-        //}
-
-        //using (DepthFrame frame = obj.DepthFrame)
-        //{
-        //    countDepth++;
-
-        //    if ((DateTime.Now - dateDepth).Seconds >= 1)
-        //    {
-        //        Debug.Log("Depth: " + countDepth);
-
-        //        dateDepth = DateTime.Now;
-        //        countDepth = 0;
-        //    }
-        //}
+        Debug.Log("Recording completed!");
     }
 
     private float MedianDepth()
@@ -184,5 +143,15 @@ public class Sample : MonoBehaviour
         }
 
         return result;
+    }
+
+    public void OnStartRecording()
+    {
+        device.IsRecording = true;
+    }
+
+    public void OnStopRecording()
+    {
+        device.IsRecording = false;
     }
 }
