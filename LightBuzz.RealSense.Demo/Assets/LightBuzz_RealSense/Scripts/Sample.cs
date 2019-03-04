@@ -42,7 +42,7 @@ public class Sample : MonoBehaviour
 
     private void Update()
     {
-        if (device.IsOpen)
+        if (data != null)
         {
             texture.LoadRawTextureData(data.ColorData);
             texture.Apply(false);
